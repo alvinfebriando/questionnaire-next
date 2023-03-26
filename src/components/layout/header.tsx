@@ -10,6 +10,7 @@ import {
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { useState } from 'react';
 import SwitchToggle from './switchToggle';
 
@@ -99,8 +100,9 @@ interface HeaderResponsiveProps {
 }
 
 export default function HeaderResponsive({ links }: HeaderResponsiveProps) {
+  const router = useRouter();
   const [opened, { toggle, close }] = useDisclosure(false);
-  const [active, setActive] = useState(links[0].link);
+  const [active, setActive] = useState(router.pathname);
   const { classes, cx } = useStyles();
 
   const items = links.map(link => (
