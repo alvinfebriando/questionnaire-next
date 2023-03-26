@@ -11,6 +11,7 @@ import {
 import { useDisclosure } from '@mantine/hooks';
 import Link from 'next/link';
 import { useState } from 'react';
+import SwitchToggle from './switchToggle';
 
 const HEADER_HEIGHT = rem(60);
 
@@ -131,6 +132,7 @@ export default function HeaderResponsive({ links }: HeaderResponsiveProps) {
           className={classes.burger}
           size='sm'
         />
+        <SwitchToggle />
 
         <Transition transition='pop-top-right' duration={200} mounted={opened}>
           {styles => (
