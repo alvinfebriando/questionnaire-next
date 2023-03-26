@@ -1,4 +1,5 @@
-import { API_URL, AllSurveyResponse } from './common';
+import { API_URL } from './common';
+import { AllSurveyResponse } from './types';
 
 export const getAllSurvey = async (): Promise<AllSurveyResponse> => {
   const response = await fetch(`${API_URL}/survey`, {
