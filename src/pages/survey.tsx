@@ -1,12 +1,9 @@
-import { AllSurveyResponse } from '@/api/common';
+import { AllSurveyResponse } from '@/api/types';
 import { getAllSurvey } from '@/api/survey';
+import SurveyTable from '@/components/survey/surveyTable';
 
 const Survey = (surveys: AllSurveyResponse) => {
-  const surveyItems = surveys.surveys.map(s => (
-    <div key={s.id}>{s.subject}</div>
-  ));
-
-  return <h3>{surveyItems}</h3>;
+  return <SurveyTable survey={surveys} role='Respondent' />;
 };
 
 export async function getStaticProps() {
