@@ -1,4 +1,4 @@
-const About = () => {
-  return <h3>About</h3>;
+const Admin = () => {
+  return <h3>Admin</h3>;
 };
-export default About;
+export default Admin;
