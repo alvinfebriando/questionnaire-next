@@ -12,7 +12,7 @@ type AddSurveyProps = {
 };
 
 export type AddSurveyField = {
-  name: keyof Survey | 'questions';
+  name: keyof Survey | 'questionId';
   label: string;
   type: 'text' | 'date' | 'number' | 'checkbox';
 };
@@ -44,7 +44,7 @@ const surveyField: AddSurveyField[] = [
     type: 'text',
   },
   {
-    name: 'questions',
+    name: 'questionId',
     label: 'Pertanyaan',
     type: 'checkbox',
   },
@@ -56,7 +56,7 @@ const schema = z.object({
   subject: z.string().nonempty(),
   respondent: z.number().min(1).max(100),
   lecturer: z.string().nonempty(),
-  question: z.array(z.string()).nonempty(),
+  questionId: z.array(z.string()).nonempty(),
 });
 
 const AddSurvey = ({ questions }: AddSurveyProps) => {
@@ -67,14 +67,21 @@ const AddSurvey = ({ questions }: AddSurveyProps) => {
       subject: '',
       respondent: 0,
       lecturer: '',
-      questions: [],
+      questionId: [],
     },
     validate: zodResolver(schema),
     validateInputOnChange: true,
   });
 
   const handleSubmit = (v: typeof form.values) => {
-    console.log(v);
+    let survey = {
+      ...v,
+      date: v.date.toISOString().slice(0, 10),
+      questionCount: v.questionId.length,
+      aspectCount: 6,
+      respondent: v.respondent,
+    };
+    addSurvey(survey);
   };
 
   const handleError = (e: typeof form.errors) => {

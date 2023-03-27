@@ -1,7 +1,8 @@
-import { AddSurveyField, SurveyFormValue } from '@/pages/admin/survey/add';
+import { AddSurveyField } from '@/pages/admin/survey/add';
 import { Question } from '@/types/question';
-import { Checkbox, Group, NumberInput, Stack, TextInput } from '@mantine/core';
-import { DateInput, DateValue } from '@mantine/dates';
+import { SurveyFormValue } from '@/types/survey';
+import { NumberInput, TextInput } from '@mantine/core';
+import { DateInput } from '@mantine/dates';
 import { UseFormReturnType } from '@mantine/form';
 import QuestionCheckbox from './questionCheckbox';
 
