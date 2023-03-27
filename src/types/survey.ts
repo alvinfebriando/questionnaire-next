@@ -9,7 +9,7 @@ export interface Survey {
   place: string;
   date: Date;
   subject: string;
-  respondent: string;
+  respondent: number;
   lecturer: string;
   questionCount: number;
   aspectCount: string;

@@ -59,7 +59,7 @@ const AddSurvey = ({ questions }: AddSurveyProps) => {
       place: '',
       date: new Date(Date.now()),
       subject: '',
-      respondent: '',
+      respondent: 0,
       lecturer: '',
       question: [],
     },
