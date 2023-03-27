@@ -1,10 +1,11 @@
 import { UUID } from 'crypto';
+import { Question } from './question';
 
-export interface Surveys {
+export type Surveys = {
   surveys: Survey[];
-}
+};
 
-export interface Survey {
+export type Survey = {
   id: UUID;
   place: string;
   date: Date;
@@ -13,4 +14,11 @@ export interface Survey {
   lecturer: string;
   questionCount: number;
   aspectCount: string;
-}
+};
+
+export type SurveyFormValue = Omit<
+  Survey,
+  'id' | 'questionCount' | 'aspectCount'
+> & {
+  questions: string[];
+};

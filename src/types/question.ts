@@ -1,10 +1,10 @@
 import { UUID } from 'crypto';
 
-export interface Questions {
+export type Questions = {
   questions: Question[];
-}
+};
 
-export interface Question {
+export type Question = {
   id: UUID;
   question: string;
-}
+};

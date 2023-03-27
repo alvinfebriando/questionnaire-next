@@ -13,9 +13,9 @@ type QuestionCheckboxProps = {
 };
 
 const QuestionCheckbox = ({ f, form, questions }: QuestionCheckboxProps) => {
-  const allChecked = questions.every(q => form.values.question.includes(q.id));
+  const allChecked = questions.every(q => form.values.questions.includes(q.id));
   const indeterminate =
-    questions.some(q => form.values.question.includes(q.id)) && !allChecked;
+    questions.some(q => form.values.questions.includes(q.id)) && !allChecked;
   const questionId = questions.map(q => q.id);
   return (
     <>

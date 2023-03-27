@@ -1,7 +1,8 @@
 import { getAllQuestion } from '@/api/question';
+import { addSurvey } from '@/api/survey';
 import AddSurveyFormInput from '@/components/survey/addSurveyFormInput';
 import { Question } from '@/types/question';
-import { Survey } from '@/types/survey';
+import { Survey, SurveyFormValue } from '@/types/survey';
 import { Button, Flex, Paper, Stack } from '@mantine/core';
 import { useForm, zodResolver } from '@mantine/form';
 import { z } from 'zod';
@@ -49,11 +50,6 @@ const surveyField: AddSurveyField[] = [
   },
 ];
 
-export type SurveyFormValue = Omit<
-  Survey,
-  'id' | 'questionCount' | 'aspectCount'
-> & { question: string[] };
-
 const schema = z.object({
   place: z.string().nonempty(),
   date: z.date(),
@@ -71,7 +67,7 @@ const AddSurvey = ({ questions }: AddSurveyProps) => {
       subject: '',
       respondent: 0,
       lecturer: '',
-      question: [],
+      questions: [],
     },
     validate: zodResolver(schema),
     validateInputOnChange: true,
