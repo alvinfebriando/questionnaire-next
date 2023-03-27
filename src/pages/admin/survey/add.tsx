@@ -2,8 +2,9 @@ import { getAllQuestion } from '@/api/question';
 import AddSurveyFormInput from '@/components/survey/addSurveyFormInput';
 import { Question } from '@/types/question';
 import { Survey } from '@/types/survey';
-import { Button, Checkbox, Flex, Paper, Stack } from '@mantine/core';
-import { useForm } from '@mantine/form';
+import { Button, Flex, Paper, Stack } from '@mantine/core';
+import { useForm, zodResolver } from '@mantine/form';
+import { z } from 'zod';
 
 type AddSurveyProps = {
   questions: Question[];
@@ -53,6 +54,15 @@ export type SurveyFormValue = Omit<
   'id' | 'questionCount' | 'aspectCount'
 > & { question: string[] };
 
+const schema = z.object({
+  place: z.string().nonempty(),
+  date: z.date(),
+  subject: z.string().nonempty(),
+  respondent: z.number().min(1).max(100),
+  lecturer: z.string().nonempty(),
+  question: z.array(z.string()).nonempty(),
+});
+
 const AddSurvey = ({ questions }: AddSurveyProps) => {
   const form = useForm<SurveyFormValue>({
     initialValues: {
@@ -63,15 +73,21 @@ const AddSurvey = ({ questions }: AddSurveyProps) => {
       lecturer: '',
       question: [],
     },
+    validate: zodResolver(schema),
+    validateInputOnChange: true,
   });
+
+  const handleSubmit = (v: typeof form.values) => {
+    console.log(v);
+  };
+
+  const handleError = (e: typeof form.errors) => {
+    console.log(e);
+  };
 
   return (
     <Paper shadow='md' p='md' withBorder>
-      <form
-        onSubmit={form.onSubmit(a => {
-          console.log(a);
-        })}
-      >
+      <form onSubmit={form.onSubmit(handleSubmit, handleError)}>
         <Stack>
           <AddSurveyFormInput
             form={form}
