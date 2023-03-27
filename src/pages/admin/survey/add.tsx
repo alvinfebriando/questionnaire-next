@@ -12,7 +12,7 @@ type AddSurveyProps = {
 };
 
 export type AddSurveyField = {
-  name: keyof Survey | 'question';
+  name: keyof Survey | 'questions';
   label: string;
   type: 'text' | 'date' | 'number' | 'checkbox';
 };
@@ -44,7 +44,7 @@ const surveyField: AddSurveyField[] = [
     type: 'text',
   },
   {
-    name: 'question',
+    name: 'questions',
     label: 'Pertanyaan',
     type: 'checkbox',
   },
