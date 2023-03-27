@@ -3,14 +3,16 @@ import { AllSurveyResponse } from '@/api/types';
 import SurveyTable from '@/components/survey/surveyTable';
 import { Box, Button, Stack } from '@mantine/core';
 import { IconPlus } from '@tabler/icons-react';
+import { useRouter } from 'next/router';
 import { MouseEventHandler } from 'react';
 
-const createNewSurvey: MouseEventHandler<HTMLButtonElement> = e => {
-  console.log(e.currentTarget);
-};
-
 const Admin = (surveys: AllSurveyResponse) => {
-  console.log(surveys);
+  const router = useRouter();
+
+  const createNewSurvey: MouseEventHandler<HTMLButtonElement> = e => {
+    router.push('/admin/survey/add');
+  };
+
   return (
     <Stack>
       <Box>
