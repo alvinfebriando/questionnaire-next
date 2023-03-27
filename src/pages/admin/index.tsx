@@ -1,12 +1,12 @@
 import { getAllSurvey } from '@/api/survey';
-import { AllSurveyResponse } from '@/api/types';
+import { Surveys } from '@/types/survey';
 import SurveyTable from '@/components/survey/surveyTable';
 import { Box, Button, Stack } from '@mantine/core';
 import { IconPlus } from '@tabler/icons-react';
 import { useRouter } from 'next/router';
 import { MouseEventHandler } from 'react';
 
-const Admin = (surveys: AllSurveyResponse) => {
+const Admin = (surveys: Surveys) => {
   const router = useRouter();
 
   const createNewSurvey: MouseEventHandler<HTMLButtonElement> = e => {

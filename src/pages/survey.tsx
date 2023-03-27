@@ -1,8 +1,8 @@
-import { AllSurveyResponse } from '@/api/types';
+import { Surveys } from '@/types/survey';
 import { getAllSurvey } from '@/api/survey';
 import SurveyTable from '@/components/survey/surveyTable';
 
-const Survey = (surveys: AllSurveyResponse) => {
+const Survey = (surveys: Surveys) => {
   return <SurveyTable survey={surveys} role='Respondent' />;
 };
 

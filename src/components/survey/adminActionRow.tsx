@@ -1,9 +1,9 @@
-import { SurveyResponse } from '@/api/types';
+import { Survey } from '@/types/survey';
 import { Group, ActionIcon } from '@mantine/core';
 import { IconEye, IconEdit, IconTrash } from '@tabler/icons-react';
 
 type AdminActionRowProps = {
-  survey: SurveyResponse;
+  survey: Survey;
 };
 
 const AdminActionRow = ({ survey }: AdminActionRowProps) => (

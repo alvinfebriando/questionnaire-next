@@ -1,10 +1,10 @@
 import { UUID } from 'crypto';
 
-export interface AllSurveyResponse {
-  surveys: SurveyResponse[];
+export interface Surveys {
+  surveys: Survey[];
 }
 
-export interface SurveyResponse {
+export interface Survey {
   id: UUID;
   place: string;
   date: Date;
@@ -13,9 +13,4 @@ export interface SurveyResponse {
   lecturer: string;
   questionCount: number;
   aspectCount: string;
-}
-
-export interface QuestionResponse {
-  id: UUID;
-  question: string;
 }

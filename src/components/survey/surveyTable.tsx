@@ -1,4 +1,4 @@
-import { AllSurveyResponse, SurveyResponse } from '@/api/types';
+import { Surveys, Survey } from '@/types/survey';
 import { Group, ActionIcon } from '@mantine/core';
 import { IconEye, IconEdit, IconTrash } from '@tabler/icons-react';
 import { DataTable, DataTableColumn } from 'mantine-datatable';
@@ -6,12 +6,12 @@ import AdminActionRow from './adminActionRow';
 import RespondentActionRow from './respondentActionRow';
 
 type SurveyTableProps = {
-  survey: AllSurveyResponse;
+  survey: Surveys;
   role: 'Admin' | 'Respondent';
 };
 
 const SurveyTable = ({ survey, role }: SurveyTableProps) => {
-  const columns: DataTableColumn<SurveyResponse>[] = [
+  const columns: DataTableColumn<Survey>[] = [
     { accessor: 'place' },
     { accessor: 'date' },
     { accessor: 'subject' },
