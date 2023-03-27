@@ -28,8 +28,7 @@ const AddSurveyFormInput = ({
               key={f.name}
               label={f.label}
               placeholder={f.name}
-              value={form.values[f.name as keyof SurveyFormValue] as DateValue}
-              onChange={value => form.setFieldValue(f.name, value)}
+              {...form.getInputProps(f.name)}
             />
           );
         } else if (f.type === 'text') {
@@ -38,10 +37,7 @@ const AddSurveyFormInput = ({
               key={f.name}
               label={f.label}
               placeholder={f.name}
-              value={form.values[f.name as keyof SurveyFormValue] as string}
-              onChange={event =>
-                form.setFieldValue(f.name, event.currentTarget.value)
-              }
+              {...form.getInputProps(f.name)}
             />
           );
         } else if (f.type === 'number') {
@@ -52,12 +48,7 @@ const AddSurveyFormInput = ({
               placeholder={f.name}
               min={1}
               max={100}
-              value={
-                form.values[
-                  f.name as keyof SurveyFormValue
-                ] as unknown as number
-              }
-              onChange={value => form.setFieldValue(f.name, value)}
+              {...form.getInputProps(f.name)}
             />
           );
         } else if (f.type === 'checkbox') {

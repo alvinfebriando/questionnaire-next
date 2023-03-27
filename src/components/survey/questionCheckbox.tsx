@@ -32,12 +32,7 @@ const QuestionCheckbox = ({ f, form, questions }: QuestionCheckboxProps) => {
             : form.setFieldValue(f.name, questionId);
         }}
       />
-      <Checkbox.Group
-        key={f.name}
-        // label='Pertanyaan'
-        value={form.values.question}
-        onChange={event => form.setFieldValue(f.name, event)}
-      >
+      <Checkbox.Group key={f.name} {...form.getInputProps(f.name)}>
         <Stack>
           {questions.map(q => (
             <Checkbox key={q.id} value={q.id} label={q.question} />
