@@ -5,6 +5,7 @@ import { Question } from '@/types/question';
 import { Survey, SurveyFormValue } from '@/types/survey';
 import { Button, Flex, Paper, Stack } from '@mantine/core';
 import { useForm, zodResolver } from '@mantine/form';
+import { notifications } from '@mantine/notifications';
 import { z } from 'zod';
 
 type AddSurveyProps = {
@@ -82,6 +83,10 @@ const AddSurvey = ({ questions }: AddSurveyProps) => {
       respondent: v.respondent,
     };
     addSurvey(survey);
+    notifications.show({
+      title: 'Success',
+      message: 'New survey created successfully',
+    });
   };
 
   const handleError = (e: typeof form.errors) => {

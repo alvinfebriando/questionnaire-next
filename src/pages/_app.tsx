@@ -5,6 +5,7 @@ import {
   ColorSchemeProvider,
   MantineProvider,
 } from '@mantine/core';
+import { Notifications } from '@mantine/notifications';
 import type { AppProps } from 'next/app';
 import { useState } from 'react';
 
@@ -24,6 +25,7 @@ export default function App({ Component, pageProps }: AppProps) {
         withNormalizeCSS
         theme={{ colorScheme }}
       >
+        <Notifications />
         <Layout>
           <Component {...pageProps} />
         </Layout>
