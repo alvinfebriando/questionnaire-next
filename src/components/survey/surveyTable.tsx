@@ -2,6 +2,7 @@ import { Surveys, Survey } from '@/types/survey';
 import { Group, ActionIcon } from '@mantine/core';
 import { IconEye, IconEdit, IconTrash } from '@tabler/icons-react';
 import { DataTable, DataTableColumn } from 'mantine-datatable';
+import { useRouter } from 'next/router';
 import AdminActionRow from './adminActionRow';
 import RespondentActionRow from './respondentActionRow';
 
@@ -11,6 +12,7 @@ type SurveyTableProps = {
 };
 
 const SurveyTable = ({ survey, role }: SurveyTableProps) => {
+  const router = useRouter();
   const columns: DataTableColumn<Survey>[] = [
     { accessor: 'place' },
     { accessor: 'date' },
@@ -40,7 +42,12 @@ const SurveyTable = ({ survey, role }: SurveyTableProps) => {
       highlightOnHover
       columns={columns}
       records={survey.surveys}
-    ></DataTable>
+      onRowClick={(survey, index) => {
+        if (role === 'Respondent') {
+          router.push(`/survey/${survey.id}`);
+        }
+      }}
+    />
   );
 };
 

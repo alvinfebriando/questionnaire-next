@@ -1,5 +1,11 @@
 import { API_URL, API_URL_PUBLIC } from './common';
-import { Surveys, SurveyFormValue, AddSurveyRequest } from '../types/survey';
+import {
+  Surveys,
+  SurveyFormValue,
+  AddSurveyRequest,
+  Survey,
+} from '../types/survey';
+import { UUID } from 'crypto';
 
 export const getAllSurvey = async (): Promise<Surveys> => {
   const response = await fetch(`${API_URL}/survey`, {
@@ -18,4 +24,12 @@ export const addSurvey = async (survey: AddSurveyRequest) => {
     },
   });
   console.log(response);
+};
+
+export const getSurveyById = async (id: UUID) => {
+  const response = await fetch(`${API_URL_PUBLIC}/survey/${id}`, {
+    method: 'GET',
+  });
+  const data: Survey = await response.json();
+  return data;
 };
