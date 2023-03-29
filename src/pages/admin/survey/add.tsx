@@ -6,6 +6,7 @@ import { Survey, SurveyFormValue } from '@/types/survey';
 import { Button, Flex, Paper, Stack } from '@mantine/core';
 import { useForm, zodResolver } from '@mantine/form';
 import { notifications } from '@mantine/notifications';
+import { useRouter } from 'next/router';
 import { z } from 'zod';
 
 type AddSurveyProps = {
@@ -74,6 +75,8 @@ const AddSurvey = ({ questions }: AddSurveyProps) => {
     validateInputOnChange: true,
   });
 
+  const router = useRouter();
+
   const handleSubmit = (v: typeof form.values) => {
     let survey = {
       ...v,
@@ -87,6 +90,7 @@ const AddSurvey = ({ questions }: AddSurveyProps) => {
       title: 'Success',
       message: 'New survey created successfully',
     });
+    router.push('/admin/survey');
   };
 
   const handleError = (e: typeof form.errors) => {
