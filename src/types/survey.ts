@@ -1,4 +1,5 @@
 import { UUID } from 'crypto';
+import { Question } from './question';
 
 export type Surveys = {
   surveys: Survey[];
@@ -13,6 +14,7 @@ export type Survey = {
   lecturer: string;
   questionCount: number;
   aspectCount: number;
+  questions: Question[];
 };
 
 export type SurveyFormValue = Omit<

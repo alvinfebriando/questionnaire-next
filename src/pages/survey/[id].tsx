@@ -2,12 +2,18 @@ import { getAllSurvey, getSurveyById } from '@/api/survey';
 import { Survey } from '@/types/survey';
 import { UUID } from 'crypto';
 import { GetStaticPropsContext } from 'next';
+import dynamic from 'next/dynamic';
 import { ParsedUrlQuery } from 'querystring';
 
 type SurveyDetailProps = Survey;
 
+const SurveyForm = dynamic(
+  () => import('../../components/survey/answerSurveyForm'),
+  { ssr: false }
+);
+
 const SurveyDetail = (survey: SurveyDetailProps) => {
-  return <h1>{survey.id}</h1>;
+  return <SurveyForm survey={survey} />;
 };
 
 interface IParams extends ParsedUrlQuery {
