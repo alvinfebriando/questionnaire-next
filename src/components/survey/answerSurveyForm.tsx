@@ -1,5 +1,9 @@
+import { sendAnswer } from '@/api/answer';
+import { Answer } from '@/types/answer';
 import { Survey } from '@/types/survey';
 import { Box, Button, Stack } from '@mantine/core';
+import { UUID } from 'crypto';
+import { useRouter } from 'next/router';
 import { Model } from 'survey-core';
 import 'survey-core/modern.min.css';
 import { Survey as SurveyRender } from 'survey-react-ui';
@@ -13,17 +17,25 @@ function randomIntFromInterval(min: number, max: number) {
 }
 
 const SurveyForm = ({ survey }: SurveyFormProps) => {
+  const router = useRouter();
+
   const model = generateSurveyModel(survey);
 
   model.onComplete.add((sender, options) => {
     options.showSaveInProgress('Saving...');
     options.showSaveSuccess('Success');
-    let data = model.getPlainData();
-    let a = data.map(d => ({
+    let data = model.getPlainData().map(d => ({
       name: d.name,
       value: d.value,
     }));
-    console.log(a);
+    const answer: Answer[] = data.map(d => ({
+      surveyId: survey.id,
+      questionId: d.name as UUID,
+      score: d.value,
+    }));
+
+    sendAnswer(answer);
+    router.push('/survey');
   });
 
   const handleRandomize = () => {
