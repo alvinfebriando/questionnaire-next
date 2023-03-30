@@ -1,4 +1,5 @@
 import { Survey } from '@/types/survey';
+import { Box, Button, Stack } from '@mantine/core';
 import { Model } from 'survey-core';
 import 'survey-core/modern.min.css';
 import { Survey as SurveyRender } from 'survey-react-ui';
@@ -6,6 +7,10 @@ import { Survey as SurveyRender } from 'survey-react-ui';
 type SurveyFormProps = {
   survey: Survey;
 };
+
+function randomIntFromInterval(min: number, max: number) {
+  return Math.floor(Math.random() * (max - min + 1) + min);
+}
 
 const SurveyForm = ({ survey }: SurveyFormProps) => {
   const model = generateSurveyModel(survey);
@@ -20,7 +25,21 @@ const SurveyForm = ({ survey }: SurveyFormProps) => {
     }));
     console.log(a);
   });
-  return <SurveyRender model={model} />;
+
+  const handleRandomize = () => {
+    survey.questions.map(s => {
+      model.setValue(s.id, randomIntFromInterval(1, 5));
+    });
+  };
+
+  return (
+    <Stack>
+      <Box>
+        <Button onClick={handleRandomize}>Randomize Answer</Button>
+      </Box>
+      <SurveyRender model={model} />;
+    </Stack>
+  );
 };
 
 function generateSurveyModel(survey: Survey) {
