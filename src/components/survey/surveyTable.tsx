@@ -45,6 +45,8 @@ const SurveyTable = ({ survey, role }: SurveyTableProps) => {
       onRowClick={(survey, index) => {
         if (role === 'Respondent') {
           router.push(`/survey/${survey.id}`);
+        } else if (role === 'Admin') {
+          router.push(`/admin/survey/${survey.id}`);
         }
       }}
     />

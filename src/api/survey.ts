@@ -33,3 +33,11 @@ export const getSurveyById = async (id: UUID) => {
   const data: Survey = await response.json();
   return data;
 };
+
+export const getReportById = async (id: UUID) => {
+  const response = await fetch(`${API_URL_PUBLIC}/report/${id}`, {
+    method: 'GET',
+  });
+  const data: string = await response.json();
+  return data;
+};
