@@ -84,6 +84,7 @@ const AddSurvey = ({ questions }: AddSurveyProps) => {
       questionCount: v.questionId.length,
       aspectCount: 6,
       respondent: v.respondent,
+      questions: questions,
     };
     addSurvey(survey);
     notifications.show({

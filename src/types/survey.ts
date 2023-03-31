@@ -19,7 +19,7 @@ export type Survey = {
 
 export type SurveyFormValue = Omit<
   Survey,
-  'id' | 'questionCount' | 'aspectCount'
+  'id' | 'questionCount' | 'aspectCount' | 'questions'
 > & {
   questionId: string[];
 };
