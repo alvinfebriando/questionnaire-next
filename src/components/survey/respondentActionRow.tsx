@@ -1,17 +1,24 @@
 import { Survey } from '@/types/survey';
-import { Group, ActionIcon } from '@mantine/core';
-import { IconEye, IconEdit, IconTrash } from '@tabler/icons-react';
+import { ActionIcon, Group } from '@mantine/core';
+import { IconClipboard } from '@tabler/icons-react';
+import { useRouter } from 'next/router';
 
 type RespondentActionRowProps = {
   survey: Survey;
 };
 
-const RespondentActionRow = ({ survey }: RespondentActionRowProps) => (
-  <Group spacing={4} position='right' noWrap>
-    <ActionIcon color='green' onClick={() => console.log(survey)}>
-      <IconEye size={16} />
-    </ActionIcon>
-  </Group>
-);
+const RespondentActionRow = ({ survey }: RespondentActionRowProps) => {
+  const router = useRouter();
+  return (
+    <Group spacing={4} position='right' noWrap>
+      <ActionIcon
+        color='green'
+        onClick={() => router.push(`/survey/${survey.id}`)}
+      >
+        <IconClipboard size={16} />
+      </ActionIcon>
+    </Group>
+  );
+};
 
 export default RespondentActionRow;

@@ -42,13 +42,6 @@ const SurveyTable = ({ survey, role }: SurveyTableProps) => {
       highlightOnHover
       columns={columns}
       records={survey.surveys}
-      onRowClick={(survey, index) => {
-        if (role === 'Respondent') {
-          router.push(`/survey/${survey.id}`);
-        } else if (role === 'Admin') {
-          router.push(`/admin/survey/${survey.id}`);
-        }
-      }}
     />
   );
 };
