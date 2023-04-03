@@ -1,4 +1,5 @@
 import { Layout } from '@/components/layout';
+import { useLoader } from '@/hooks/loader';
 import '@/styles/globals.css';
 import {
   ColorScheme,
@@ -15,6 +16,8 @@ export default function App({ Component, pageProps }: AppProps) {
     setColorScheme(value || (colorScheme === 'dark' ? 'light' : 'dark'));
   };
 
+  const loader = useLoader();
+
   return (
     <ColorSchemeProvider
       colorScheme={colorScheme}
@@ -27,6 +30,7 @@ export default function App({ Component, pageProps }: AppProps) {
       >
         <Notifications />
         <Layout>
+          {loader}
           <Component {...pageProps} />
         </Layout>
       </MantineProvider>
