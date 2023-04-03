@@ -134,7 +134,7 @@ export default function HeaderResponsive({ links }: HeaderResponsiveProps) {
           className={classes.burger}
           size='sm'
         />
-        <SwitchToggle />
+        {/* <SwitchToggle /> */}
 
         <Transition transition='pop-top-right' duration={200} mounted={opened}>
           {styles => (
