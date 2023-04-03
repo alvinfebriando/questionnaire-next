@@ -91,7 +91,7 @@ const AddSurvey = ({ questions }: AddSurveyProps) => {
       title: 'Success',
       message: 'New survey created successfully',
     });
-    router.push('/admin/survey');
+    router.push('/admin');
   };
 
   const handleError = (e: typeof form.errors) => {
