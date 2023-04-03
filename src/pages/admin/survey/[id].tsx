@@ -29,7 +29,7 @@ export async function getStaticPaths() {
   const paths = surveys.surveys.map(s => ({
     params: { id: s.id },
   }));
-  return { paths, fallback: false };
+  return { paths, fallback: true };
 }
 
 export default ReportDetail;
