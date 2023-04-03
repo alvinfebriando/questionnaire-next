@@ -22,7 +22,7 @@ export type AddSurveyField = {
 const surveyField: AddSurveyField[] = [
   {
     name: 'place',
-    label: 'Lingkungan pelaksanaan survey',
+    label: 'Kelas',
     type: 'text',
   },
   {
@@ -32,18 +32,18 @@ const surveyField: AddSurveyField[] = [
   },
   {
     name: 'subject',
-    label: 'Judul survey',
+    label: 'Mata kuliah',
+    type: 'text',
+  },
+  {
+    name: 'lecturer',
+    label: 'Nama dosen',
     type: 'text',
   },
   {
     name: 'respondent',
     label: 'Jumlah responden',
     type: 'number',
-  },
-  {
-    name: 'lecturer',
-    label: 'Nama dosen',
-    type: 'text',
   },
   {
     name: 'questionId',
