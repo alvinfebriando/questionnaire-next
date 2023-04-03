@@ -23,14 +23,14 @@ const SurveyTable = ({ survey, role }: SurveyTableProps) => {
   if (role === 'Admin') {
     columns.push({
       accessor: 'action',
-      title: 'Row actions',
+      title: 'Actions',
       textAlignment: 'right',
       render: s => <AdminActionRow survey={s} />,
     });
   } else if (role === 'Respondent') {
     columns.push({
       accessor: 'action',
-      title: 'Row actions',
+      title: 'Actions',
       textAlignment: 'right',
       render: s => <RespondentActionRow survey={s} />,
     });

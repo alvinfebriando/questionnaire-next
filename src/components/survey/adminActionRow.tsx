@@ -19,12 +19,6 @@ const AdminActionRow = ({ survey }: AdminActionRowProps) => {
           <IconReport size={16} />
         </ActionIcon>
       </Tooltip>
-      <ActionIcon color='blue' onClick={() => console.log(survey)}>
-        <IconEdit size={16} />
-      </ActionIcon>
-      <ActionIcon color='red' onClick={() => console.log(survey)}>
-        <IconTrash size={16} />
-      </ActionIcon>
     </Group>
   );
 };
