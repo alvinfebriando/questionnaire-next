@@ -6,10 +6,6 @@ export const Layout = ({ children }: PropsWithChildren) => {
   const l = {
     links: [
       {
-        link: '/report',
-        label: 'Report',
-      },
-      {
         link: '/survey',
         label: 'Survey',
       },
