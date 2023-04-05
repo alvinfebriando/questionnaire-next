@@ -41,11 +41,6 @@ const surveyField: AddSurveyField[] = [
     type: 'text',
   },
   {
-    name: 'respondent',
-    label: 'Jumlah responden',
-    type: 'number',
-  },
-  {
     name: 'questionId',
     label: 'Pertanyaan',
     type: 'checkbox',
@@ -56,7 +51,6 @@ const schema = z.object({
   place: z.string().nonempty(),
   date: z.date(),
   subject: z.string().nonempty(),
-  respondent: z.number().min(1).max(100),
   lecturer: z.string().nonempty(),
   questionId: z.array(z.string()).nonempty(),
 });
@@ -67,7 +61,6 @@ const AddSurvey = ({ questions }: AddSurveyProps) => {
       place: '',
       date: new Date(Date.now()),
       subject: '',
-      respondent: 0,
       lecturer: '',
       questionId: [],
     },
@@ -83,7 +76,6 @@ const AddSurvey = ({ questions }: AddSurveyProps) => {
       date: v.date.toISOString().slice(0, 10),
       questionCount: v.questionId.length,
       aspectCount: 6,
-      respondent: v.respondent,
       questions: questions,
     };
     addSurvey(survey);

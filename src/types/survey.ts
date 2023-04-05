@@ -10,7 +10,6 @@ export type Survey = {
   place: string;
   date: Date;
   subject: string;
-  respondent: number;
   lecturer: string;
   questionCount: number;
   aspectCount: number;
