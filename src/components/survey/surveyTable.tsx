@@ -5,6 +5,9 @@ import { DataTable, DataTableColumn } from 'mantine-datatable';
 import { useRouter } from 'next/router';
 import AdminActionRow from './adminActionRow';
 import RespondentActionRow from './respondentActionRow';
+import { useState } from 'react';
+import { UUID } from 'crypto';
+import { deleteSurvey } from '@/api/survey';
 
 type SurveyTableProps = {
   survey: Surveys;
@@ -13,6 +16,18 @@ type SurveyTableProps = {
 
 const SurveyTable = ({ survey, role }: SurveyTableProps) => {
   const router = useRouter();
+  const [records, setRecords] = useState(survey.surveys);
+
+  const handleDelete = async (id: UUID) => {
+    await deleteSurvey(id);
+    setRecords(prev => {
+      const index = prev.findIndex(r => r.id == id);
+      const newRecords = [...prev];
+      newRecords.splice(index, 1);
+      return newRecords;
+    });
+  };
+
   const columns: DataTableColumn<Survey>[] = [
     { accessor: 'place' },
     { accessor: 'date' },
@@ -25,7 +40,7 @@ const SurveyTable = ({ survey, role }: SurveyTableProps) => {
       accessor: 'action',
       title: 'Actions',
       textAlignment: 'right',
-      render: s => <AdminActionRow survey={s} />,
+      render: s => <AdminActionRow survey={s} handleDelete={handleDelete} />,
     });
   } else if (role === 'Respondent') {
     columns.push({
@@ -37,12 +52,7 @@ const SurveyTable = ({ survey, role }: SurveyTableProps) => {
   }
 
   return (
-    <DataTable
-      striped
-      highlightOnHover
-      columns={columns}
-      records={survey.surveys}
-    />
+    <DataTable striped highlightOnHover columns={columns} records={records} />
   );
 };
 

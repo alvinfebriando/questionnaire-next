@@ -1,13 +1,16 @@
+import { deleteSurvey } from '@/api/survey';
 import { Survey } from '@/types/survey';
 import { Group, ActionIcon, Tooltip } from '@mantine/core';
 import { IconEye, IconEdit, IconTrash, IconReport } from '@tabler/icons-react';
-import { useRouter } from 'next/router';
+import { UUID } from 'crypto';
+import { NextRouter, useRouter } from 'next/router';
 
 type AdminActionRowProps = {
   survey: Survey;
+  handleDelete: (id: UUID) => void;
 };
 
-const AdminActionRow = ({ survey }: AdminActionRowProps) => {
+const AdminActionRow = ({ survey, handleDelete }: AdminActionRowProps) => {
   const router = useRouter();
   return (
     <Group spacing={4} position='right' noWrap>
@@ -17,6 +20,11 @@ const AdminActionRow = ({ survey }: AdminActionRowProps) => {
           onClick={() => router.push(`/admin/survey/${survey.id}`)}
         >
           <IconReport size={16} />
+        </ActionIcon>
+      </Tooltip>
+      <Tooltip label='Delete survey'>
+        <ActionIcon color='red' onClick={() => handleDelete(survey.id)}>
+          <IconTrash size={16} />
         </ActionIcon>
       </Tooltip>
     </Group>

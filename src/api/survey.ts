@@ -41,3 +41,11 @@ export const getReportById = async (id: UUID) => {
   const data: string = await response.json();
   return data;
 };
+
+export const deleteSurvey = async (id: UUID) => {
+  console.log(`${API_URL_PUBLIC}/survey/${id}`);
+  const response = await fetch(`${API_URL_PUBLIC}/survey/${id}`, {
+    method: 'DELETE',
+  });
+  console.log(response);
+};
