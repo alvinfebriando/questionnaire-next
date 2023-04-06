@@ -6,6 +6,7 @@ import RespondentActionRow from './respondentActionRow';
 import { useState } from 'react';
 import { UUID } from 'crypto';
 import { deleteSurvey } from '@/api/survey';
+import { notifications } from '@mantine/notifications';
 
 type SurveyTableProps = {
   survey: Surveys;
@@ -24,6 +25,11 @@ const SurveyTable = ({ survey, role }: SurveyTableProps) => {
       newRecords.splice(index, 1);
       return newRecords;
     });
+    notifications.show({
+      title: 'Deleted',
+      message: 'Survey deleted successfully',
+      color: 'red',
+    });
   };
 
   const columns: DataTableColumn<Survey>[] = [
@@ -36,14 +42,12 @@ const SurveyTable = ({ survey, role }: SurveyTableProps) => {
   if (role === 'Admin') {
     columns.push({
       accessor: 'action',
-      title: 'Actions',
       textAlignment: 'right',
       render: s => <AdminActionRow survey={s} handleDelete={handleDelete} />,
     });
   } else if (role === 'Respondent') {
     columns.push({
       accessor: 'action',
-      title: 'Actions',
       textAlignment: 'right',
       render: s => <RespondentActionRow survey={s} />,
     });
