@@ -80,8 +80,9 @@ const AddSurvey = ({ questions }: AddSurveyProps) => {
     };
     addSurvey(survey);
     notifications.show({
-      title: 'Success',
+      title: 'Created',
       message: 'New survey created successfully',
+      color: 'teal',
     });
     router.push('/admin');
   };
