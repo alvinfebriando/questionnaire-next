@@ -1,9 +1,8 @@
-import { deleteSurvey } from '@/api/survey';
 import { Survey } from '@/types/survey';
 import { Group, ActionIcon, Tooltip } from '@mantine/core';
-import { IconEye, IconEdit, IconTrash, IconReport } from '@tabler/icons-react';
+import { IconTrash, IconReport } from '@tabler/icons-react';
 import { UUID } from 'crypto';
-import { NextRouter, useRouter } from 'next/router';
+import { useRouter } from 'next/router';
 
 type AdminActionRowProps = {
   survey: Survey;

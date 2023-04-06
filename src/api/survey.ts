@@ -1,7 +1,6 @@
 import { API_URL, API_URL_PUBLIC } from './common';
 import {
   Surveys,
-  SurveyFormValue,
   AddSurveyRequest,
   Survey,
 } from '../types/survey';

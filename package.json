@@ -31,5 +31,8 @@
     "survey-react-ui": "^1.9.80",
     "typescript": "5.0.2",
     "zod": "^3.21.4"
+  },
+  "devDependencies": {
+    "eslint-plugin-unused-imports": "^2.0.0"
   }
 }

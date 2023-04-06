@@ -1,6 +1,4 @@
 import { Surveys, Survey } from '@/types/survey';
-import { Group, ActionIcon } from '@mantine/core';
-import { IconEye, IconEdit, IconTrash } from '@tabler/icons-react';
 import { DataTable, DataTableColumn } from 'mantine-datatable';
 import { useRouter } from 'next/router';
 import AdminActionRow from './adminActionRow';

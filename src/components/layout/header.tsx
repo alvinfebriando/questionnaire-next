@@ -12,7 +12,6 @@ import { useDisclosure } from '@mantine/hooks';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
-import SwitchToggle from './switchToggle';
 
 const HEADER_HEIGHT = rem(60);
 
