@@ -64,7 +64,7 @@ const AddSurvey = ({ questions, lecturers }: AddSurveyProps) => {
       place: '',
       date: new Date(Date.now()),
       subject: '',
-      lecturerId: '-----',
+      lecturerId: lecturers[0].id,
       questionId: [],
     },
     validate: zodResolver(schema),
