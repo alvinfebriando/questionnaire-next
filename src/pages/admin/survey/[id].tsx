@@ -2,13 +2,20 @@ import { getAllSurvey, getReportById } from '@/api/survey';
 import { UUID } from 'crypto';
 import { GetStaticPropsContext } from 'next';
 import { ParsedUrlQuery } from 'querystring';
-import { Text } from '@mantine/core';
+import { Center, Text } from '@mantine/core';
 
 type ReportDetailProps = {
   report: { report: string };
 };
 
 const ReportDetail = ({ report }: ReportDetailProps) => {
+  if (report.report === undefined) {
+    return (
+      <Center>
+        <Text>No answer recorded</Text>
+      </Center>
+    );
+  }
   return <Text style={{ whiteSpace: 'pre-wrap' }}>{report.report}</Text>;
 };
 
