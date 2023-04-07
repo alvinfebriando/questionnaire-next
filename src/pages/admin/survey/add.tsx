@@ -26,7 +26,7 @@ const surveyField: AddSurveyField[] = [
   {
     name: 'place',
     label: 'Kelas',
-    type: 'text',
+    type: 'select',
   },
   {
     name: 'date',
@@ -36,7 +36,7 @@ const surveyField: AddSurveyField[] = [
   {
     name: 'subject',
     label: 'Mata kuliah',
-    type: 'text',
+    type: 'select',
   },
   {
     name: 'lecturerId',

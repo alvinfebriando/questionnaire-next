@@ -17,16 +17,43 @@ type AddSurevyFormInputProps = {
   lecturers: Lecturer[];
 };
 
+type SurveySelectInput = {
+  [k in keyof Pick<SurveyFormValue, 'place' | 'lecturerId' | 'subject'>]: {
+    value: string;
+    label: string;
+  }[];
+};
+
 const AddSurveyFormInput = ({
   surveyFields,
   form,
   questions,
   lecturers,
 }: AddSurevyFormInputProps) => {
-  const data = lecturers.map(l => ({
-    value: l.id,
+  const lecturerSelectData = lecturers.map(l => ({
+    value: l.id as string,
     label: `${l.title} ${l.name}`,
   }));
+
+  const classSelectData = ['A', 'B', 'C'].map(c => ({
+    value: c,
+    label: c,
+  }));
+
+  const subjectSelectData = [
+    'Dasar Pemrograman',
+    'Pemrograman Web',
+    'Sistem Basis Data',
+  ].map(s => ({
+    value: s,
+    label: s,
+  }));
+
+  const data: SurveySelectInput = {
+    lecturerId: lecturerSelectData,
+    place: classSelectData,
+    subject: subjectSelectData,
+  };
   return (
     <>
       {surveyFields.map(f => {
@@ -73,8 +100,8 @@ const AddSurveyFormInput = ({
             <Select
               key={f.name}
               label={f.label}
-              data={data}
-              {...form.getInputProps('lecturerId')}
+              data={data[f.name as keyof SurveySelectInput]}
+              {...form.getInputProps(f.name)}
             />
           );
         }
