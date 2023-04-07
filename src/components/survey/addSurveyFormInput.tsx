@@ -1,10 +1,11 @@
 import { AddSurveyField } from '@/pages/admin/survey/add';
 import { Question } from '@/types/question';
 import { SurveyFormValue } from '@/types/survey';
-import { NumberInput, TextInput } from '@mantine/core';
+import { NumberInput, Select, TextInput } from '@mantine/core';
 import { DateInput } from '@mantine/dates';
 import { UseFormReturnType } from '@mantine/form';
 import QuestionCheckbox from './questionCheckbox';
+import { Lecturer } from '@/types/lecturer';
 
 type AddSurevyFormInputProps = {
   surveyFields: AddSurveyField[];
@@ -13,13 +14,19 @@ type AddSurevyFormInputProps = {
     (values: SurveyFormValue) => SurveyFormValue
   >;
   questions: Question[];
+  lecturers: Lecturer[];
 };
 
 const AddSurveyFormInput = ({
   surveyFields,
   form,
   questions,
+  lecturers,
 }: AddSurevyFormInputProps) => {
+  const data = lecturers.map(l => ({
+    value: l.id,
+    label: `${l.title} ${l.name}`,
+  }));
   return (
     <>
       {surveyFields.map(f => {
@@ -59,6 +66,15 @@ const AddSurveyFormInput = ({
               f={f}
               form={form}
               questions={questions}
+            />
+          );
+        } else if (f.type === 'select') {
+          return (
+            <Select
+              key={f.name}
+              label={f.label}
+              data={data}
+              {...form.getInputProps('lecturerId')}
             />
           );
         }

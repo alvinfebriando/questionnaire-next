@@ -1,10 +1,10 @@
-import { Survey } from '@/types/survey';
+import { SurveyTableRecords } from '@/types/survey';
 import { ActionIcon, Group } from '@mantine/core';
 import { IconClipboard } from '@tabler/icons-react';
 import { useRouter } from 'next/router';
 
 type RespondentActionRowProps = {
-  survey: Survey;
+  survey: SurveyTableRecords;
 };
 
 const RespondentActionRow = ({ survey }: RespondentActionRowProps) => {

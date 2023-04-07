@@ -1,6 +1,6 @@
 import { sendAnswer } from '@/api/answer';
 import { Answer } from '@/types/answer';
-import { Survey } from '@/types/survey';
+import { SurveyResponse } from '@/types/survey';
 import { Box, Button, Stack } from '@mantine/core';
 import { UUID } from 'crypto';
 import { useRouter } from 'next/router';
@@ -9,7 +9,7 @@ import 'survey-core/modern.min.css';
 import { Survey as SurveyRender } from 'survey-react-ui';
 
 type SurveyFormProps = {
-  survey: Survey;
+  survey: SurveyResponse;
 };
 
 function randomIntFromInterval(min: number, max: number) {
@@ -54,7 +54,7 @@ const SurveyForm = ({ survey }: SurveyFormProps) => {
   );
 };
 
-function generateSurveyModel(survey: Survey) {
+function generateSurveyModel(survey: SurveyResponse) {
   const modelElements = {
     elements: survey.questions.map(q => ({
       name: q.id,

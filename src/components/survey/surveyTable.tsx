@@ -1,4 +1,4 @@
-import { Surveys, Survey } from '@/types/survey';
+import { SurveyTableRecords } from '@/types/survey';
 import { DataTable, DataTableColumn } from 'mantine-datatable';
 import { useRouter } from 'next/router';
 import AdminActionRow from './adminActionRow';
@@ -9,13 +9,13 @@ import { deleteSurvey } from '@/api/survey';
 import { notifications } from '@mantine/notifications';
 
 type SurveyTableProps = {
-  survey: Surveys;
+  survey: SurveyTableRecords[];
   role: 'Admin' | 'Respondent';
 };
 
 const SurveyTable = ({ survey, role }: SurveyTableProps) => {
   const router = useRouter();
-  const [records, setRecords] = useState(survey.surveys);
+  const [records, setRecords] = useState(survey);
 
   const handleDelete = async (id: UUID) => {
     await deleteSurvey(id);
@@ -31,12 +31,11 @@ const SurveyTable = ({ survey, role }: SurveyTableProps) => {
       color: 'red',
     });
   };
-
-  const columns: DataTableColumn<Survey>[] = [
+  const columns: DataTableColumn<SurveyTableRecords>[] = [
     { accessor: 'place' },
     { accessor: 'date' },
     { accessor: 'subject' },
-    { accessor: 'lecturer' },
+    { accessor: 'lecturerName' },
   ];
 
   if (role === 'Admin') {

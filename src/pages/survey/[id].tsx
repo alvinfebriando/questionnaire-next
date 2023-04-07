@@ -1,11 +1,11 @@
 import { getAllSurvey, getSurveyById } from '@/api/survey';
-import { Survey } from '@/types/survey';
+import { SurveyResponse } from '@/types/survey';
 import { UUID } from 'crypto';
 import { GetStaticPropsContext } from 'next';
 import dynamic from 'next/dynamic';
 import { ParsedUrlQuery } from 'querystring';
 
-type SurveyDetailProps = Survey;
+type SurveyDetailProps = SurveyResponse;
 
 const SurveyForm = dynamic(
   () => import('../../components/survey/answerSurveyForm'),

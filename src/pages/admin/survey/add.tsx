@@ -1,8 +1,10 @@
+import { getAllLecturer } from '@/api/lecturer';
 import { getAllQuestion } from '@/api/question';
 import { addSurvey } from '@/api/survey';
 import AddSurveyFormInput from '@/components/survey/addSurveyFormInput';
+import { Lecturer } from '@/types/lecturer';
 import { Question } from '@/types/question';
-import { Survey, SurveyFormValue } from '@/types/survey';
+import { SurveyFormValue } from '@/types/survey';
 import { Button, Flex, Paper, Stack } from '@mantine/core';
 import { useForm, zodResolver } from '@mantine/form';
 import { notifications } from '@mantine/notifications';
@@ -11,12 +13,13 @@ import { z } from 'zod';
 
 type AddSurveyProps = {
   questions: Question[];
+  lecturers: Lecturer[];
 };
 
 export type AddSurveyField = {
-  name: keyof Survey | 'questionId';
+  name: keyof SurveyFormValue | 'questionId';
   label: string;
-  type: 'text' | 'date' | 'number' | 'checkbox';
+  type: 'text' | 'date' | 'number' | 'checkbox' | 'select';
 };
 
 const surveyField: AddSurveyField[] = [
@@ -36,9 +39,9 @@ const surveyField: AddSurveyField[] = [
     type: 'text',
   },
   {
-    name: 'lecturer',
+    name: 'lecturerId',
     label: 'Nama dosen',
-    type: 'text',
+    type: 'select',
   },
   {
     name: 'questionId',
@@ -51,17 +54,17 @@ const schema = z.object({
   place: z.string().nonempty(),
   date: z.date(),
   subject: z.string().nonempty(),
-  lecturer: z.string().nonempty(),
+  lecturerId: z.string().uuid().nonempty(),
   questionId: z.array(z.string()).nonempty(),
 });
 
-const AddSurvey = ({ questions }: AddSurveyProps) => {
+const AddSurvey = ({ questions, lecturers }: AddSurveyProps) => {
   const form = useForm<SurveyFormValue>({
     initialValues: {
       place: '',
       date: new Date(Date.now()),
       subject: '',
-      lecturer: '',
+      lecturerId: '-----',
       questionId: [],
     },
     validate: zodResolver(schema),
@@ -77,6 +80,7 @@ const AddSurvey = ({ questions }: AddSurveyProps) => {
       questionCount: v.questionId.length,
       aspectCount: 6,
       questions: questions,
+      lecturer: v.lecturerId,
     };
     addSurvey(survey);
     notifications.show({
@@ -99,6 +103,7 @@ const AddSurvey = ({ questions }: AddSurveyProps) => {
             form={form}
             surveyFields={surveyField}
             questions={questions}
+            lecturers={lecturers}
           />
           <Flex justify={'flex-end'}>
             <Button type='submit'>Submit</Button>
@@ -111,7 +116,8 @@ const AddSurvey = ({ questions }: AddSurveyProps) => {
 
 export async function getStaticProps() {
   const questions = await getAllQuestion();
-  return { props: questions };
+  const lecturers = await getAllLecturer();
+  return { props: { questions, lecturers } };
 }
 
 export default AddSurvey;

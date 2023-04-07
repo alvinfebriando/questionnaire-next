@@ -1,11 +1,11 @@
-import { Survey } from '@/types/survey';
+import { SurveyTableRecords } from '@/types/survey';
 import { Group, ActionIcon, Tooltip } from '@mantine/core';
 import { IconTrash, IconReport } from '@tabler/icons-react';
 import { UUID } from 'crypto';
 import { useRouter } from 'next/router';
 
 type AdminActionRowProps = {
-  survey: Survey;
+  survey: SurveyTableRecords;
   handleDelete: (id: UUID) => void;
 };
 

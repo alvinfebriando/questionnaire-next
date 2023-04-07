@@ -1,6 +1,6 @@
 import { getAllSurvey } from '@/api/survey';
-import { Surveys } from '@/types/survey';
 import SurveyTable from '@/components/survey/surveyTable';
+import { SurveyTableRecords, Surveys } from '@/types/survey';
 import { Box, Button, Stack } from '@mantine/core';
 import { IconPlus } from '@tabler/icons-react';
 import { useRouter } from 'next/router';
@@ -13,6 +13,15 @@ const Admin = (surveys: Surveys) => {
     router.push('/admin/survey/add');
   };
 
+  const data: SurveyTableRecords[] = surveys.surveys.map(s => {
+    return {
+      ...s,
+      lecturerName: `${s.lecturer.title} ${s.lecturer.name}`,
+      lecturerId: s.lecturer.id,
+      lecturer: '',
+    };
+  });
+
   return (
     <Stack>
       <Box>
@@ -20,7 +29,7 @@ const Admin = (surveys: Surveys) => {
           New
         </Button>
       </Box>
-      <SurveyTable survey={surveys} role='Admin' />
+      <SurveyTable survey={data} role='Admin' />
     </Stack>
   );
 };
