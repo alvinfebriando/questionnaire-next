@@ -77,8 +77,6 @@ const AddSurvey = ({ questions, lecturers }: AddSurveyProps) => {
     let survey = {
       ...v,
       date: v.date.toISOString().slice(0, 10),
-      questionCount: v.questionId.length,
-      aspectCount: 6,
       questions: questions,
       lecturer: v.lecturerId,
     };

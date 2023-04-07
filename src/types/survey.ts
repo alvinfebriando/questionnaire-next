@@ -12,8 +12,6 @@ export type SurveyResponse = {
   date: Date;
   subject: string;
   lecturer: Lecturer;
-  questionCount: number;
-  aspectCount: number;
   questions: Question[];
 };
 
@@ -24,7 +22,7 @@ export type SurveyTableRecords = Omit<SurveyResponse, 'lecturer'> & {
 
 export type SurveyFormValue = Omit<
   SurveyTableRecords,
-  'id' | 'questionCount' | 'aspectCount' | 'questions' | 'lecturerName'
+  'id' | 'aspectCount' | 'questions' | 'lecturerName'
 > & {
   questionId: string[];
 };
