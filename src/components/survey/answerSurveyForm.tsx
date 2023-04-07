@@ -1,9 +1,10 @@
-import { sendAnswer } from '@/api/answer';
+import { sendAnswer, sendAnswerSimulation } from '@/api/answer';
 import { Answer } from '@/types/answer';
 import { SurveyResponse } from '@/types/survey';
-import { Box, Button, Stack } from '@mantine/core';
+import { Box, Button, Checkbox, NumberInput, Stack } from '@mantine/core';
 import { UUID } from 'crypto';
 import { useRouter } from 'next/router';
+import { ChangeEventHandler, useState } from 'react';
 import { Model } from 'survey-core';
 import 'survey-core/modern.min.css';
 import { Survey as SurveyRender } from 'survey-react-ui';
@@ -18,6 +19,13 @@ function randomIntFromInterval(min: number, max: number) {
 
 const SurveyForm = ({ survey }: SurveyFormProps) => {
   const router = useRouter();
+
+  const [isSimulation, setIsSimulation] = useState(false);
+  const [n, setN] = useState(1);
+
+  const handleSimulationChange: ChangeEventHandler<HTMLInputElement> = e => {
+    setIsSimulation(e.currentTarget.checked);
+  };
 
   const model = generateSurveyModel(survey);
 
@@ -34,7 +42,11 @@ const SurveyForm = ({ survey }: SurveyFormProps) => {
       score: d.value,
     }));
 
-    sendAnswer(answer);
+    if (!isSimulation) {
+      sendAnswer(answer);
+    } else {
+      sendAnswerSimulation(answer, n);
+    }
     router.push('/survey');
   });
 
@@ -46,9 +58,28 @@ const SurveyForm = ({ survey }: SurveyFormProps) => {
 
   return (
     <Stack>
-      <Box>
-        <Button onClick={handleRandomize}>Randomize Answer</Button>
-      </Box>
+      <Stack>
+        <Box>
+          <Button onClick={handleRandomize}>Randomize Answer</Button>
+        </Box>
+        <Box>
+          <Checkbox
+            label='Mode simulasi'
+            checked={isSimulation}
+            onChange={handleSimulationChange}
+          />
+        </Box>
+        <Box sx={{ width: '200px' }}>
+          <NumberInput
+            label='Berapa jumlah responden'
+            min={1}
+            max={100}
+            disabled={!isSimulation}
+            value={n}
+            onChange={e => setN(e as number)}
+          />
+        </Box>
+      </Stack>
       <SurveyRender model={model} />;
     </Stack>
   );
