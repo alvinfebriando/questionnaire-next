@@ -32,7 +32,7 @@ const SurveyTable = ({ survey, role }: SurveyTableProps) => {
     });
   };
   const columns: DataTableColumn<SurveyTableRecords>[] = [
-    { accessor: 'place' },
+    { accessor: 'class', render: ({ place }) => place },
     { accessor: 'date' },
     { accessor: 'subject' },
     { accessor: 'lecturerName' },
