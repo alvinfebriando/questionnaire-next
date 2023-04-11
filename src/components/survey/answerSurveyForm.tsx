@@ -48,7 +48,11 @@ const SurveyForm = ({ survey, isAdmin }: SurveyFormProps) => {
     } else {
       sendAnswerSimulation(answer, n);
     }
-    router.push('/survey');
+    if (!isAdmin) {
+      router.push('/survey');
+    } else {
+      router.push('/admin');
+    }
   });
 
   const handleRandomize = () => {
