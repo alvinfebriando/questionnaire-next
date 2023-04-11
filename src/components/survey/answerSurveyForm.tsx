@@ -11,13 +11,14 @@ import { Survey as SurveyRender } from 'survey-react-ui';
 
 type SurveyFormProps = {
   survey: SurveyResponse;
+  isAdmin: boolean;
 };
 
 function randomIntFromInterval(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
-const SurveyForm = ({ survey }: SurveyFormProps) => {
+const SurveyForm = ({ survey, isAdmin }: SurveyFormProps) => {
   const router = useRouter();
 
   const [isSimulation, setIsSimulation] = useState(false);
@@ -58,28 +59,30 @@ const SurveyForm = ({ survey }: SurveyFormProps) => {
 
   return (
     <Stack>
-      <Stack>
-        <Box>
-          <Button onClick={handleRandomize}>Randomize Answer</Button>
-        </Box>
-        <Box>
-          <Checkbox
-            label='Mode simulasi'
-            checked={isSimulation}
-            onChange={handleSimulationChange}
-          />
-        </Box>
-        <Box sx={{ width: '200px' }}>
-          <NumberInput
-            label='Berapa jumlah responden'
-            min={1}
-            max={100}
-            disabled={!isSimulation}
-            value={n}
-            onChange={e => setN(e as number)}
-          />
-        </Box>
-      </Stack>
+      {isAdmin ? (
+        <Stack>
+          <Box>
+            <Button onClick={handleRandomize}>Randomize Answer</Button>
+          </Box>
+          <Box>
+            <Checkbox
+              label='Mode simulasi'
+              checked={isSimulation}
+              onChange={handleSimulationChange}
+            />
+          </Box>
+          <Box sx={{ width: '200px' }}>
+            <NumberInput
+              label='Berapa jumlah responden'
+              min={1}
+              max={100}
+              disabled={!isSimulation}
+              value={n}
+              onChange={e => setN(e as number)}
+            />
+          </Box>
+        </Stack>
+      ) : null}
       <SurveyRender model={model} />;
     </Stack>
   );

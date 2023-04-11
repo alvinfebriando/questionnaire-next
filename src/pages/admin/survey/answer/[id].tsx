@@ -8,12 +8,12 @@ import { ParsedUrlQuery } from 'querystring';
 type SurveyDetailProps = SurveyResponse;
 
 const SurveyForm = dynamic(
-  () => import('../../components/survey/answerSurveyForm'),
+  () => import('@/components/survey/answerSurveyForm'),
   { ssr: false }
 );
 
 const SurveyDetail = (survey: SurveyDetailProps) => {
-  return <SurveyForm isAdmin={false} survey={survey} />;
+  return <SurveyForm isAdmin={true} survey={survey} />;
 };
 
 interface IParams extends ParsedUrlQuery {
