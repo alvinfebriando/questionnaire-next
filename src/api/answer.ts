@@ -1,5 +1,6 @@
-import { Answer } from '@/types/answer';
+import { Answer, ChartData } from '@/types/answer';
 import { API_URL_PUBLIC } from './common';
+import { UUID } from 'crypto';
 
 export const sendAnswer = async (answers: Answer[]) => {
   const response = await fetch(`${API_URL_PUBLIC}/answer`, {
@@ -19,4 +20,12 @@ export const sendAnswerSimulation = async (answers: Answer[], n: number) => {
     },
     body: JSON.stringify({ answers, n }),
   });
+};
+
+export const getChartData = async (surveyId: UUID) => {
+  const response = await fetch(`${API_URL_PUBLIC}/answer/${surveyId}/chart`, {
+    method: 'GET',
+  });
+  const data: ChartData = await response.json();
+  return data;
 };
