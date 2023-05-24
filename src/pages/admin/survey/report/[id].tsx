@@ -23,7 +23,11 @@ const ReportDetail = ({ report, chartData }: ReportDetailProps) => {
       </Center>
     );
   }
-  text = <Text style={{ whiteSpace: 'pre-wrap' }}>{report.report}</Text>;
+  text = (
+    <Text style={{ whiteSpace: 'pre-wrap', textAlign: 'justify' }}>
+      {report.report}
+    </Text>
+  );
 
   const data = chartData.answers.map(qs => {
     return {
