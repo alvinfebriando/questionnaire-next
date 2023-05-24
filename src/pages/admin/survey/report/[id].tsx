@@ -41,6 +41,9 @@ const ReportDetail = ({ report, chartData }: ReportDetailProps) => {
   return (
     <>
       <Stack>
+        <Center>
+          <Title order={3}>Rangkuman hasil kuesioner</Title>
+        </Center>
         {text}
         <Center>
           <Title order={3}>Grafik hasil kuesioner</Title>
