@@ -6,6 +6,7 @@ import { DateInput } from '@mantine/dates';
 import { UseFormReturnType } from '@mantine/form';
 import QuestionCheckbox from './questionCheckbox';
 import { Lecturer } from '@/types/lecturer';
+import { subjects } from '@/data/subjects';
 
 type AddSurevyFormInputProps = {
   surveyFields: AddSurveyField[];
@@ -40,11 +41,7 @@ const AddSurveyFormInput = ({
     label: c,
   }));
 
-  const subjectSelectData = [
-    'Dasar Pemrograman',
-    'Pemrograman Web',
-    'Sistem Basis Data',
-  ].map(s => ({
+  const subjectSelectData = subjects.map(s => ({
     value: s,
     label: s,
   }));
